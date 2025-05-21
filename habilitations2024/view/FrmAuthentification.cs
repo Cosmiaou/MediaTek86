@@ -57,7 +57,7 @@ namespace mediatek86.view
 
                 if (controller.ControleAuthentification(responsable))
                 {
-                    FrmHabilitations frmHabilitations = new FrmHabilitations();
+                    FrmPersonnel frmHabilitations = new FrmPersonnel();
                     frmHabilitations.ShowDialog();
                     this.Close();
                 } 

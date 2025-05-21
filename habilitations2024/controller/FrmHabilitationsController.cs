@@ -12,15 +12,19 @@ namespace mediatek86.controller
     public class FrmHabilitationsController
     {
         private readonly PersonnelAccess persoAccess;
-        private readonly ServiceAccess servAccess;
+        private readonly ServiceAccess serviceAccess;
+        private readonly MotifAccess motifAccess;
+        private readonly AbsenceAccess absenceAccess;
 
         /// <summary>
         /// Constructeur
         /// </summary>
         public FrmHabilitationsController()
         {
-            servAccess = new ServiceAccess();
+            serviceAccess = new ServiceAccess();
             persoAccess = new PersonnelAccess();
+            absenceAccess = new AbsenceAccess();
+            motifAccess = new MotifAccess();
         }
 
         /// <summary>
@@ -35,34 +39,79 @@ namespace mediatek86.controller
         /// <summary>
         /// Reçoit la liste des services
         /// </summary>
-        /// <returns>List Developpeur</returns>
+        /// <returns>List Service</returns>
         public List<Service> GetLesServices()
         {
-            return servAccess.GetItems();
+            return serviceAccess.GetItems();
         }
 
         /// <summary>
-        /// Appelle la fonction de suppression d'un développeur
+        /// Reçoit la liste des absences
         /// </summary>
-        /// <param name="perso">Object de type Developpeur</param>
-        public void DelItem (Personnel perso) {
+        /// <returns>List Absence</returns>
+        public List<Absence> GetLesAbsences(Personnel perso)
+        {
+            return absenceAccess.GetLesAbsences(perso);
+        }
+
+        /// <summary>
+        /// Reçoit la liste des motifs d'absence
+        /// </summary>
+        /// <returns>list Motif</returns>
+        public List<Motif> GetLesMotifs()
+        {
+            return motifAccess.GetItems();
+        }
+
+        /// <summary>
+        /// Appelle la fonction de suppression d'un personnel
+        /// </summary>
+        /// <param name="perso">Object de type Personnel</param>
+        public void DelPerso (Personnel perso) {
             persoAccess.DelItem(perso);
         }
 
         /// <summary>
-        /// Appelle la fonction d'ajout d'un développeur
+        /// Appelle la fonction d'ajout d'un personnel
         /// </summary>
-        /// <param name="perso">Objet développeur</param>
-        public void AddItem (Personnel perso) {
+        /// <param name="perso">Objet personnel</param>
+        public void AddPerso (Personnel perso) {
             persoAccess.AddItem(perso);
         }
 
         /// <summary>
-        /// Appelle la fonction de MàJ d'un développeur
+        /// Appelle la fonction de MàJ d'un personnel
         /// </summary>
-        /// <param name="perso">Objet développeur</param>
-        public void UpdateItem (Personnel perso) {
+        /// <param name="perso">Objet Personnel</param>
+        public void UpdatePerso (Personnel perso) {
             persoAccess.UpdateItem(perso);
+        }
+
+        /// <summary>
+        /// Appelle la fonction de suppression d'une absence
+        /// </summary>
+        /// <param name="absence"></param>
+        public void DelAbsence(Absence absence)
+        {
+            absenceAccess.DelItem(absence);
+        }
+
+        /// <summary>
+        /// Appelle la fonction d'ajout d'une absence
+        /// </summary>
+        /// <param name="absence">Objet absence</param>
+        public void AddAbsence(Absence absence)
+        {
+            absenceAccess.AddItem(absence);
+        }
+
+        /// <summary>
+        /// Appelle la fonction de MàJ d'une absence
+        /// </summary>
+        /// <param name="absence">Objet absence</param>
+        public void UpdateAbsence(Absence absence)
+        {
+            absenceAccess.UpdateItem(absence);
         }
     }
 }
