@@ -14,7 +14,7 @@ namespace mediatek86.dal
         /// <summary>
         /// Chaine de connection à la base de donnée
         /// </summary>
-        private static readonly string connectionString = "Server=localhost;Database=mediatek86;User Id=appmediatek_PC1;Password=7P!qGm#d#8T9#nrb;";
+        private static readonly string connectionString = "Server=localhost;Database=mediatek_86;User Id=appmediatek_PC1;Password=7P!qGm#d#8T9#nrb;";
         /// <summary>
         /// Instance unique de la classe
         /// </summary>

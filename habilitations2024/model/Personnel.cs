@@ -50,5 +50,10 @@ namespace mediatek86.model
         /// Objet de type service associé à l'employé
         /// </summary>
         public Service Service { get; set; }
+
+        public override string ToString()
+        {
+            return this.Prenom + " " + this.Nom + " de " + this.Service;
+        }
     }
 }

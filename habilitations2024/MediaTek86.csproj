@@ -69,9 +69,13 @@
     <Compile Include="controller\FrmAuthentificationController.cs" />
     <Compile Include="controller\FrmHabilitationsController.cs" />
     <Compile Include="dal\Access.cs" />
+    <Compile Include="dal\AbsenceAccess.cs" />
     <Compile Include="dal\PersonnelAccess.cs" />
     <Compile Include="dal\ResponsableAccess.cs" />
+    <Compile Include="dal\MotifAccess.cs" />
     <Compile Include="dal\ServiceAccess.cs" />
+    <Compile Include="model\Motif.cs" />
+    <Compile Include="model\Absence.cs" />
     <Compile Include="model\Responsable.cs" />
     <Compile Include="model\Personnel.cs" />
     <Compile Include="model\Service.cs" />
@@ -81,19 +85,19 @@
     <Compile Include="view\FrmAuthentification.Designer.cs">
       <DependentUpon>FrmAuthentification.cs</DependentUpon>
     </Compile>
-    <Compile Include="view\FrmHabilitations.cs">
+    <Compile Include="view\FrmPersonnel.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="view\FrmHabilitations.Designer.cs">
-      <DependentUpon>FrmHabilitations.cs</DependentUpon>
+    <Compile Include="view\FrmPersonnel.Designer.cs">
+      <DependentUpon>FrmPersonnel.cs</DependentUpon>
     </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <EmbeddedResource Include="view\FrmAuthentification.resx">
       <DependentUpon>FrmAuthentification.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="view\FrmHabilitations.resx">
-      <DependentUpon>FrmHabilitations.cs</DependentUpon>
+    <EmbeddedResource Include="view\FrmPersonnel.resx">
+      <DependentUpon>FrmPersonnel.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
