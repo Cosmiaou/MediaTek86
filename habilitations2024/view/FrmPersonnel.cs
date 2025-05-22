@@ -11,6 +11,7 @@ using MySql.Data.MySqlClient;
 using mediatek86.controller;
 using mediatek86.model;
 using static System.Windows.Forms.VisualStyles.VisualStyleElement.ListView;
+using System.Diagnostics.Eventing.Reader;
 
 
 namespace mediatek86.view
@@ -18,8 +19,17 @@ namespace mediatek86.view
     public partial class FrmPersonnel : Form
     {
         private FrmHabilitationsController controller;
+        /// <summary>
+        /// Objet de type Personnel représentant le personnel sélectionné dans dgwDonnees, afin d'être utilisé dans plusieurs fonctions de l'onglet Absence
+        /// </summary>
         Personnel personnelSelectionne;
+        /// <summary>
+        /// Booléen de contrôle afin de vérifier si nous en sommes modification ou en ajout du personnel
+        /// </summary>
         private bool modifPerso = false;
+        /// <summary>
+        /// Booléen de contrôle afin de vérifier si nous en sommes modification ou en ajout d'une absence
+        /// </summary>
         private bool modifAbsence = false;
 
         /// <summary>
@@ -43,7 +53,7 @@ namespace mediatek86.view
         }
 
         /// <summary>
-        /// Rempli cmbService et cmbMotif et place son index à 0
+        /// Rempli cmbService et cmbMotif et place leur index à 0
         /// </summary>
         private void remplirCombo()
         {
@@ -65,7 +75,7 @@ namespace mediatek86.view
         }
 
         /// <summary>
-        /// Rempli dgwDonnees via GetLesDeveloppeurs() du controlleur et masque deux colonnes
+        /// Rempli dgwDonnees via GetLesPerso() du controlleur et masque une colonne
         /// </summary>
         private void afficherTout()
         {
@@ -102,7 +112,7 @@ namespace mediatek86.view
         }
 
         /// <summary>
-        /// Vérifie si les champs du grbAjouterPerso sont vides. Si oui, return false.
+        /// Vide les champs du grbAjouterPerso
         /// </summary>
         /// <returns></returns>
         private void remplissageCase()
@@ -122,14 +132,13 @@ namespace mediatek86.view
         /// <returns></returns>
         private bool verifierChampsPerso()
         {
-            if (txbNom.Text.Equals("") || txbPrenom.Text.Equals("") || txbTel.Text.Equals("") || txbMail.Text.Equals("") || cmbService.SelectedIndex == 0) { 
-                   return false; }
-            else { return true;  }
+            if (txbNom.Text.Equals("") || txbPrenom.Text.Equals("") || txbTel.Text.Equals("") || txbMail.Text.Equals("") || cmbService.SelectedIndex == 0) {
+                return false; }
+            else { return true; }
         }
 
         /// <summary>
-        /// Récupère l'objet sélectionné dans dgwDonnees et appelle controller.DelDev() pour le supprimer.
-        /// Met à jour l'affichage. Si aucun objet n'est supprimé, affiche un message d'erreur.
+        /// Récupère l'objet sélectionné dans dgwDonnees et appelle controller.DelPerso() pour le supprimer. Met à jour l'affichage. Si aucun objet n'est sélectionné, affiche un message d'erreur.
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
@@ -138,8 +147,12 @@ namespace mediatek86.view
             Personnel objet = (Personnel)dgwDonnees.CurrentRow.DataBoundItem;
             if (objet != null)
             {
-                controller.DelPerso(objet);
-                afficherTout();
+                var result = MessageBox.Show("Êtes vous sûr de vouloir confirmer la suppression de cet item ?", "Confirmation", MessageBoxButtons.YesNo);
+                if (result == DialogResult.Yes)
+                {
+                    controller.DelPerso(objet);
+                    afficherTout();
+                }
             }
             else
             {
@@ -148,16 +161,26 @@ namespace mediatek86.view
         }
 
         /// <summary>
-        /// Change le booléen modif en true pour btnAjouterDev_Click(). Change le texte de grbAjouterDev
+        /// Change le booléen modif en true pour btnAjouterPerso_Click(). Change le texte de grbAjouterPerso
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
         private void btnModifierItem_Click(object sender, EventArgs e)
         {
+            Personnel objet = (Personnel)dgwDonnees.CurrentRow.DataBoundItem;
+            grbPersonnel.Enabled = false;
+            grbAjouterPerso.Enabled = true;
+            string name = objet.ToString();
             modifPerso = true;
-            grbAjouterPerso.Text = "Modifiez un personnel :";
+            grbAjouterPerso.Text = "Modifiez " + name;
+
         }
 
+        /// <summary>
+        /// Appelle la vérification des informations remplies, affiche une boite de confirmation. Si oui, appelle la fonction qui enverra une demande pour créer/modifiier un personnel
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void btnAjouterPerso_Click(object sender, EventArgs e)
         {
             if (verifierChampsPerso())
@@ -168,32 +191,59 @@ namespace mediatek86.view
                 string email = txbMail.Text;
                 Service profil = (Service)cmbService.SelectedItem;
 
-                if (modifPerso)
+                if (MessageBox.Show("Voulez-vous vraiment confirmer ?", "Confirmation", MessageBoxButtons.YesNo) == DialogResult.Yes)
                 {
-                    modifier(prenom, nom, tel, email, profil);
+                    grbPersonnel.Enabled = true;
+                    grbAjouterPerso.Enabled = false;
+
+                    if (modifPerso)
+                    {
+                        modifier(prenom, nom, tel, email, profil);
+                    }
+                    else
+                    {
+                        Personnel dev = new Personnel(0, nom, prenom, tel, email, profil);
+                        controller.AddPerso(dev);
+                    }
+                    afficherTout();
+                    viderChamps();
                 }
-                else
-                {
-                    Personnel dev = new Personnel(0, nom, prenom, tel, email, profil);
-                    controller.AddPerso(dev);
-                }
-                afficherTout();
             }
             else { MessageBox.Show("Veuillez remplir toutes les cases"); }
         }
 
+        /// <summary>
+        /// Demande confirmation pour annuler les modifications en cours. Appelle la fonction viderChamps()
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void btnAnnulerPerso_Click(object sender, EventArgs e)
         {
             if (MessageBox.Show("Voulez-vous vraiment annuler ?", "Confirmation", MessageBoxButtons.YesNo) == DialogResult.Yes)
             {
-                txbPrenom.Text = "";
-                txbNom.Text = "";
-                txbTel.Text = "";
-                txbMail.Text = "";
-                cmbService.SelectedIndex = 0;
+                viderChamps();
+                grbAjouterPerso.Enabled = false;
+                grbPersonnel.Enabled = true;
+
             }
         }
 
+        /// <summary>
+        /// Vide les champs de grbAjouterPersonnel
+        /// </summary>
+        private void viderChamps()
+        {
+            txbPrenom.Text = "";
+            txbNom.Text = "";
+            txbTel.Text = "";
+            txbMail.Text = "";
+            cmbService.SelectedIndex = 0;
+        }
+
+        /// <summary>
+        /// Permet d'afficher les absences de l'utilisateur sélectionné. /!\ ne vérifie pas si l'utilisateur existe, peut donc causer un crash si appelée sans précaution
+        /// </summary>
+        /// <param name="objet"></param>
         private void afficherAbsence(Personnel objet)
         {
             List<Absence> liste = controller.GetLesAbsences(objet);
@@ -202,6 +252,10 @@ namespace mediatek86.view
             dgwAbsence.Columns["Idabsence"].Visible = false;
         }
 
+        /// <summary>
+        /// Permet de remplir les champs de grbModifierAbsence par les infos de l'item sélectionné
+        /// </summary>
+        /// <param name="absence"></param>
         private void remplirAbsence(Absence absence)
         {
             dtpDebut.Value = absence.DateDebut;
@@ -209,6 +263,9 @@ namespace mediatek86.view
             cmbMotif.SelectedIndex = absence.Motif.Idmotif;
         }
 
+        /// <summary>
+        /// Crée un objet de type Absence avec les données indiquées par l'utilisateur. Les envois pour mettre à jour la BdD
+        /// </summary>
         private void modifierAbsence()
         {
             Absence objet = (Absence)dgwAbsence.CurrentRow.DataBoundItem;
@@ -224,13 +281,16 @@ namespace mediatek86.view
 
                 controller.UpdateAbsence(objet);
 
-                modifAbsence = false;
-                grbAbsence.Enabled = true;
-                grbModifierAbsence.Text = "Ajouter une absence :";
+                PasserAjoutAbsence();
                 afficherAbsence(personnelSelectionne);
             }
         }
 
+        /// <summary>
+        /// Vérifie si un personnel est sélectionné. Si oui, passe sur l'onglet Absence. De fait, la vérification ne marche pas. Si aucun élement n'est sélectionné, un crash aura lieu. 
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void btnAbsence_Click(object sender, EventArgs e)
         {
             try
@@ -251,65 +311,230 @@ namespace mediatek86.view
             }
         }
 
+        /// <summary>
+        /// En cas de clic sur le tableau, appelle la fonction de remplissage de champs
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void dgwDonnees_MouseClick(object sender, MouseEventArgs e)
         {
             remplissageCase();
         }
 
+        /// <summary>
+        /// Appelle la fonction PasserModifAbsence()
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void btnModifierAbsence_Click(object sender, EventArgs e)
         {
-            modifAbsence = true;
-            grbModifierAbsence.Text = "Modifier une absence : ";
+            PasserModifAbsence();
         }
 
+        /// <summary>
+        /// Retourne sur l'onglet Personnel
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void btnRetour_Click(object sender, EventArgs e)
         {
             tbcControl.SelectedTab = tabPage1;
         }
 
+        /// <summary>
+        /// Active les boutons Supprimer et ModifierAbsence, bloqués par défaut pour éviter des crashs. Rempli les cases avec l'élément sélectionné
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void dgwAbsence_CellContentClick(object sender, DataGridViewCellEventArgs e)
         {
+            btnModifierAbsence.Enabled = true;
+            btnSupprimerAbsence.Enabled = true;
             Absence absence = (Absence)dgwAbsence.CurrentRow.DataBoundItem;
             remplirAbsence(absence);
         }
 
+        /// <summary>
+        /// Après avoir appelé les fonctions de vérifications nécessaires et demander la confirmation, , crée un objet de type Absence et l'envoi se faire ajouter
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void btnEnregistrerAbsence_Click(object sender, EventArgs e)
         {
-            if (modifAbsence)
+            if (verifierAbsence())
             {
-                modifierAbsence();
-            }
-            else {
-                DateTime datedebut = dtpDebut.Value;
-                DateTime datefin = dtpFin.Value;
-                Motif motif = cmbMotif.SelectedItem as Motif;
+                if (MessageBox.Show("Voulez-vous confirmer les modifications ?", "Confirmation", MessageBoxButtons.YesNo) == DialogResult.Yes)
+                {
+                    if (modifAbsence)
+                    {
+                        modifierAbsence();
+                    }
+                    else
+                    {
+                        DateTime datedebut = dtpDebut.Value;
+                        DateTime datefin = dtpFin.Value;
+                        Motif motif = cmbMotif.SelectedItem as Motif;
 
-                Absence absence = new Absence(0, datedebut, datefin, motif, personnelSelectionne);
+                        Absence absence = new Absence(0, datedebut, datefin, motif, personnelSelectionne);
 
-                controller.AddAbsence(absence);
-                afficherAbsence(personnelSelectionne);
+                        controller.AddAbsence(absence);
+                        afficherAbsence(personnelSelectionne);
+                    }
+                    PasserAjoutAbsence();
+                }
             }
         }
 
+        /// <summary>
+        /// Charge l'objet sélectionné de type Absence depuis dgwAbsence. S'il n'est pas nul, le supprime après avoir demandé confirmation. S'il est nul, erreur
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void btnSupprimerAbsence_Click(object sender, EventArgs e)
         {
             Absence absence = (Absence)dgwAbsence.CurrentRow.DataBoundItem;
             if (absence != null)
             {
-                controller.DelAbsence(absence);
-                afficherAbsence(personnelSelectionne);
+                var result = MessageBox.Show("Êtes vous sûr de vouloir confirmer la suppression de cet item ?", "Confirmation", MessageBoxButtons.YesNo);
+                if (result == DialogResult.Yes)
+                {
+                    controller.DelAbsence(absence);
+                    afficherAbsence(personnelSelectionne);
+                }
             }
             else { MessageBox.Show("Merci de choisir une absence à supprimer"); }
         }
 
-        private void button1_Click(object sender, EventArgs e)
-        {
-            label2.Text = dtpDebut.Value.ToString();
-        }
-
+        /// <summary>
+        /// Active 3 boutons désactivés pour empêcher un possible crash dans le cas où aucune case n'est sélectionné.
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void dgwDonnees_CellContentClick(object sender, DataGridViewCellEventArgs e)
         {
             btnAbsence.Enabled = true;
+            btnModifierItem.Enabled = true;
+            btnSupprimer.Enabled = true;
+        }
+
+        /// <summary>
+        /// Ouvre la possibilité d'ajouter un personnel.
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void btnAjout_Click(object sender, EventArgs e)
+        {
+            viderChamps();
+            grbAjouterPerso.Enabled = true;
+            grbAjouterPerso.Text = "Ajouter un personnel : ";
+        }
+
+        /// <summary>
+        /// Réinitialise les champs de grbModificationAbsence
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void btnAnnulerAbsence_Click(object sender, EventArgs e)
+        {
+            cmbMotif.SelectedIndex = 0;
+            dtpDebut.Value = DateTime.Now;
+            dtpFin.Value = DateTime.Now;
+
+            PasserAjoutAbsence();
+        }
+
+        /// <summary>
+        /// Change l'apparence du second onglet de l'app pour passer en mode modification. Passe modifAbsence en false
+        /// </summary>
+        private void PasserAjoutAbsence()
+        {
+            grbModifierAbsence.Text = "Ajouter une absence :";
+            modifAbsence = false;
+        }
+
+        /// <summary>
+        /// Change l'apparence du second onglet de l'app pour passer en mode modification. Passe modifAbsence en true
+        /// </summary>
+        private void PasserModifAbsence()
+        {
+            grbModifierAbsence.Text = "Modifier une absence :";
+            modifAbsence = true;
+        }
+
+        /// <summary>
+        /// Booléen qui vérifie si tout les champs pour une modification ou un ajout d'absence sont valide. Ne fais qu'appeler les fonctions et afficher un message d'erreur.
+        /// </summary>
+        /// <returns></returns>
+        private bool verifierAbsence()
+        {
+            if (verifierChampsAbsence())
+            {
+                if (verifierDateExistante())
+                {
+                    if (verifierDate())
+                    {
+                        return true;
+                    } else {
+                        MessageBox.Show("La date de fin ne peut pas être avant la date de début.");
+                        return false; }
+                } else { 
+                    MessageBox.Show("D'autres absences existent déjà entre ces dates. Merci de les modifier, de les supprimer, ou de changer les dates indiquées.");
+                    return false;
+                }
+            } else {
+                MessageBox.Show("Merci de remplir tout les champs.");
+                return false; 
+            }
+        }
+        /// <summary>
+        /// Vérifie si les champs de grbModifierAbsence sont vide. Si non, renvoie True
+        /// </summary>
+        /// <returns></returns>
+        private bool verifierChampsAbsence()
+        {
+            if (dtpFin.Value != null && dtpDebut.Value != null && cmbMotif.SelectedIndex != 0) {
+                return true;
+            } else  { return false; }
+        }
+
+        /// <summary>
+        /// Vérifie si dtpFin est inférieur à dtpDebut. Si non, renvoie True
+        /// </summary>
+        /// <returns>bool</returns>
+        private bool verifierDate()
+        {
+            if (dtpFin.Value < dtpDebut.Value) {
+                return false;
+            }  else { return true; }
+        }
+
+        /// <summary>
+        /// Vérifie chaque absence de personnelSelectionne. Si une absence (autre que l'absence sélectionnée si c'est une modification) est déjà programmée entre les deux dates indiquées dans grbModifierAbsence, renvoie false.
+        /// </summary>
+        /// <returns></returns>
+        private bool verifierDateExistante()
+        {            
+            List<Absence> absences = controller.GetLesAbsences(personnelSelectionne);
+            foreach (Absence absence in absences)
+            {
+
+             if (absence.DateDebut < dtpFin.Value && absence.DateFin >= dtpDebut.Value)
+             {
+                    if (modifAbsence)
+                    {
+                        Absence absenceSelectionnee = (Absence)dgwAbsence.CurrentRow.DataBoundItem;
+                        if (absence.Idabsence != absenceSelectionnee.Idabsence)
+                        {
+                            return false;
+                        }
+                    }
+                    else
+                    {
+                        return false;
+                    }
+                    }
+            } 
+            return true;
         }
     }
 }

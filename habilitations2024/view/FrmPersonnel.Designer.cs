@@ -65,8 +65,7 @@
             this.dgwAbsence = new System.Windows.Forms.DataGridView();
             this.btnSupprimerAbsence = new System.Windows.Forms.Button();
             this.btnModifierAbsence = new System.Windows.Forms.Button();
-            this.button1 = new System.Windows.Forms.Button();
-            this.label2 = new System.Windows.Forms.Label();
+            this.btnAjout = new System.Windows.Forms.Button();
             this.grbPersonnel.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgwDonnees)).BeginInit();
             this.grbAjouterPerso.SuspendLayout();
@@ -80,6 +79,7 @@
             // 
             // grbPersonnel
             // 
+            this.grbPersonnel.Controls.Add(this.btnAjout);
             this.grbPersonnel.Controls.Add(this.btnAbsence);
             this.grbPersonnel.Controls.Add(this.lblConfirm);
             this.grbPersonnel.Controls.Add(this.dgwDonnees);
@@ -131,7 +131,8 @@
             // 
             // btnSupprimer
             // 
-            this.btnSupprimer.Location = new System.Drawing.Point(104, 148);
+            this.btnSupprimer.Enabled = false;
+            this.btnSupprimer.Location = new System.Drawing.Point(198, 148);
             this.btnSupprimer.Name = "btnSupprimer";
             this.btnSupprimer.Size = new System.Drawing.Size(88, 23);
             this.btnSupprimer.TabIndex = 1;
@@ -141,7 +142,8 @@
             // 
             // btnModifierItem
             // 
-            this.btnModifierItem.Location = new System.Drawing.Point(10, 148);
+            this.btnModifierItem.Enabled = false;
+            this.btnModifierItem.Location = new System.Drawing.Point(104, 148);
             this.btnModifierItem.Name = "btnModifierItem";
             this.btnModifierItem.Size = new System.Drawing.Size(88, 23);
             this.btnModifierItem.TabIndex = 0;
@@ -163,6 +165,7 @@
             this.grbAjouterPerso.Controls.Add(this.txbNom);
             this.grbAjouterPerso.Controls.Add(this.btnAnnulerPersonnel);
             this.grbAjouterPerso.Controls.Add(this.btnAjouterPersonnel);
+            this.grbAjouterPerso.Enabled = false;
             this.grbAjouterPerso.Location = new System.Drawing.Point(5, 189);
             this.grbAjouterPerso.Name = "grbAjouterPerso";
             this.grbAjouterPerso.Size = new System.Drawing.Size(553, 105);
@@ -381,6 +384,7 @@
             this.btnAnnulerAbsence.TabIndex = 6;
             this.btnAnnulerAbsence.Text = "Annuler";
             this.btnAnnulerAbsence.UseVisualStyleBackColor = true;
+            this.btnAnnulerAbsence.Click += new System.EventHandler(this.btnAnnulerAbsence_Click);
             // 
             // btnEnregistrerAbsence
             // 
@@ -394,8 +398,6 @@
             // 
             // grbAbsence
             // 
-            this.grbAbsence.Controls.Add(this.label2);
-            this.grbAbsence.Controls.Add(this.button1);
             this.grbAbsence.Controls.Add(this.btnRetour);
             this.grbAbsence.Controls.Add(this.label1);
             this.grbAbsence.Controls.Add(this.dgwAbsence);
@@ -445,6 +447,7 @@
             // 
             // btnSupprimerAbsence
             // 
+            this.btnSupprimerAbsence.Enabled = false;
             this.btnSupprimerAbsence.Location = new System.Drawing.Point(104, 148);
             this.btnSupprimerAbsence.Name = "btnSupprimerAbsence";
             this.btnSupprimerAbsence.Size = new System.Drawing.Size(88, 23);
@@ -455,6 +458,7 @@
             // 
             // btnModifierAbsence
             // 
+            this.btnModifierAbsence.Enabled = false;
             this.btnModifierAbsence.Location = new System.Drawing.Point(10, 148);
             this.btnModifierAbsence.Name = "btnModifierAbsence";
             this.btnModifierAbsence.Size = new System.Drawing.Size(88, 23);
@@ -463,24 +467,15 @@
             this.btnModifierAbsence.UseVisualStyleBackColor = true;
             this.btnModifierAbsence.Click += new System.EventHandler(this.btnModifierAbsence_Click);
             // 
-            // button1
+            // btnAjout
             // 
-            this.button1.Location = new System.Drawing.Point(198, 148);
-            this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(75, 23);
-            this.button1.TabIndex = 6;
-            this.button1.Text = "button1";
-            this.button1.UseVisualStyleBackColor = true;
-            this.button1.Click += new System.EventHandler(this.button1_Click);
-            // 
-            // label2
-            // 
-            this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(279, 153);
-            this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(35, 13);
-            this.label2.TabIndex = 7;
-            this.label2.Text = "label2";
+            this.btnAjout.Location = new System.Drawing.Point(11, 148);
+            this.btnAjout.Name = "btnAjout";
+            this.btnAjout.Size = new System.Drawing.Size(88, 23);
+            this.btnAjout.TabIndex = 6;
+            this.btnAjout.Text = "Ajouter";
+            this.btnAjout.UseVisualStyleBackColor = true;
+            this.btnAjout.Click += new System.EventHandler(this.btnAjout_Click);
             // 
             // FrmPersonnel
             // 
@@ -489,7 +484,7 @@
             this.ClientSize = new System.Drawing.Size(575, 353);
             this.Controls.Add(this.tbcControl);
             this.Name = "FrmPersonnel";
-            this.Text = "MediaTek86 - gestion du personnel V0.1";
+            this.Text = "MediaTek86 - gestion du personnel V0.5";
             this.Load += new System.EventHandler(this.Form1_Load);
             this.grbPersonnel.ResumeLayout(false);
             this.grbPersonnel.PerformLayout();
@@ -547,8 +542,7 @@
         private System.Windows.Forms.DateTimePicker dtpFin;
         private System.Windows.Forms.Label lblDateFin;
         private System.Windows.Forms.DateTimePicker dtpDebut;
-        private System.Windows.Forms.Label label2;
-        private System.Windows.Forms.Button button1;
+        private System.Windows.Forms.Button btnAjout;
     }
 }
 

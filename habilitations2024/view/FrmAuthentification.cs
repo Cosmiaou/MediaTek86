@@ -12,9 +12,15 @@ using mediatek86.model;
 
 namespace mediatek86.view
 {
+    /// <summary>
+    /// Form permettant l'authentification de l'utilisateur avant l'accès aux données
+    /// </summary>
     public partial class FrmAuthentification : Form
     {
         FrmAuthentificationController controller;
+        /// <summary>
+        /// Compteur permettant de stocker le nombre d'erreur durant la connexion
+        /// </summary>
         int compteurErreur = 0;
         /// <summary>
         /// Constructeur
@@ -36,10 +42,7 @@ namespace mediatek86.view
         }
 
         /// <summary>
-        /// Lors du clic sur btnConnection, vérifie si tout les champs sont remplis. Si oui, appelle
-        /// controller.ControleAuthentification() pour vérifier si le mot de passe est bon. Si oui, lance
-        /// le formulaire habilitation normal. Sinon, indique un message d'erreur. Si erreur plus de 5 fois,
-        /// ferme l'application
+        /// Lors du clic sur btnConnection, vérifie si tout les champs sont remplis. Si oui, appelle controller.ControleAuthentification() pour vérifier si le mot de passe est bon. Si oui, lance le formulaire habilitation normal. Sinon, indique un message d'erreur. Si erreur plus de 5 fois, ferme l'application
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
