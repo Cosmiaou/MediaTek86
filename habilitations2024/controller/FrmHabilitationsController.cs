@@ -68,7 +68,7 @@ namespace mediatek86.controller
         }
 
         /// <summary>
-        /// Appelle la fonction de suppression d'un personnel
+        /// Appelle la fonction de suppression d'un personnel, ainsi que celle de suppression des absences pour chaque absence associé au personnel supprimé
         /// </summary>
         /// <param name="perso">Object de type Personnel</param>
         public void DelPerso (Personnel perso) {
