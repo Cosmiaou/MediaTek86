@@ -9,10 +9,13 @@ using mediatek86.bddmanager;
 
 namespace mediatek86.dal
 {
+    /// <summary>
+    /// Classe singleton permettant la connexion à la base de donnée. Lié à BdDManager. 
+    /// </summary>
     public class Access
     {
         /// <summary>
-        /// Chaine de connection à la base de donnée
+        /// Chaine de connection à la base de donnée. Contient des données en brut comme le nom d'utilisateur, nom de BdD et mot de passe. 
         /// </summary>
         private static readonly string connectionString = "Server=localhost;Database=mediatek_86;User Id=appmediatek_PC1;Password=7P!qGm#d#8T9#nrb;";
         /// <summary>

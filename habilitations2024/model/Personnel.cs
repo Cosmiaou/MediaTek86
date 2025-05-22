@@ -6,17 +6,20 @@ using System.Threading.Tasks;
 
 namespace mediatek86.model
 {
+    /// <summary>
+    /// Classe correspondant à la table Personnel de la BdD
+    /// </summary>
     public class Personnel
     {
         /// <summary>
-        /// Crée
+        /// Crée un objet de type personnel
         /// </summary>
-        /// <param name="idpersonnel">id du développeur, définie automatiquement dans la DB. Quand on appelle la fonction pour créer un développeur, il faut mettre "0" pour laisser le SGBDD autincrémenter la fonction</param>
-        /// <param name="nom">nom du développeur</param>
-        /// <param name="prenom">prénom du dev</param>
-        /// <param name="tel">N° de téléphone du dev</param>
-        /// <param name="mail">adresse email du dev</param>
-        /// <param name="profil">Objet de type profil</param>
+        /// <param name="idpersonnel">id du personnel, définie automatiquement dans la DB. Quand on appelle la fonction pour créer un personnel, il faut mettre "0" pour laisser le SGBDD autoincrémenter la fonction</param>
+        /// <param name="nom">nom du personnel</param>
+        /// <param name="prenom">prénom du personnel</param>
+        /// <param name="tel">N° de téléphone du personnel</param>
+        /// <param name="mail">adresse email du personnel</param>
+        /// <param name="service">Objet de type service</param>
         public Personnel(int idpersonnel, string nom, string prenom, string tel, string mail, Service service) { 
             this.Idpersonnel = idpersonnel;
             this.Nom = nom;
@@ -27,7 +30,7 @@ namespace mediatek86.model
         }
 
         /// <summary>
-        /// Retourne l'id de l'employé
+        /// Retourne l'id de l'employé. Pas modifiable
         /// </summary>
         public int Idpersonnel { get;  }
         /// <summary>
@@ -51,6 +54,10 @@ namespace mediatek86.model
         /// </summary>
         public Service Service { get; set; }
 
+        /// <summary>
+        /// Renvoi une string contenant prenom, nom, et service, prêt à être utilisé
+        /// </summary>
+        /// <returns>string nom</returns>
         public override string ToString()
         {
             return this.Prenom + " " + this.Nom + " de " + this.Service;

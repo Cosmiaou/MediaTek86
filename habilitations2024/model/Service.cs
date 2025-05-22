@@ -6,6 +6,9 @@ using System.Threading.Tasks;
 
 namespace mediatek86.model
 {
+    /// <summary>
+    /// Classe correspondant à la table Service de la BdD
+    /// </summary>
     public class Service
     {
         /// <summary>

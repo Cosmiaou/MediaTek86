@@ -29,6 +29,7 @@
         private void InitializeComponent()
         {
             this.grbPersonnel = new System.Windows.Forms.GroupBox();
+            this.btnAjout = new System.Windows.Forms.Button();
             this.btnAbsence = new System.Windows.Forms.Button();
             this.lblConfirm = new System.Windows.Forms.Label();
             this.dgwDonnees = new System.Windows.Forms.DataGridView();
@@ -65,7 +66,6 @@
             this.dgwAbsence = new System.Windows.Forms.DataGridView();
             this.btnSupprimerAbsence = new System.Windows.Forms.Button();
             this.btnModifierAbsence = new System.Windows.Forms.Button();
-            this.btnAjout = new System.Windows.Forms.Button();
             this.grbPersonnel.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgwDonnees)).BeginInit();
             this.grbAjouterPerso.SuspendLayout();
@@ -91,6 +91,16 @@
             this.grbPersonnel.TabIndex = 0;
             this.grbPersonnel.TabStop = false;
             this.grbPersonnel.Text = "Personnels";
+            // 
+            // btnAjout
+            // 
+            this.btnAjout.Location = new System.Drawing.Point(11, 148);
+            this.btnAjout.Name = "btnAjout";
+            this.btnAjout.Size = new System.Drawing.Size(88, 23);
+            this.btnAjout.TabIndex = 6;
+            this.btnAjout.Text = "Ajouter";
+            this.btnAjout.UseVisualStyleBackColor = true;
+            this.btnAjout.Click += new System.EventHandler(this.btnAjout_Click);
             // 
             // btnAbsence
             // 
@@ -279,7 +289,8 @@
             // 
             this.tbcControl.Controls.Add(this.tabPage1);
             this.tbcControl.Controls.Add(this.tabPage2);
-            this.tbcControl.Location = new System.Drawing.Point(3, 7);
+            this.tbcControl.DrawMode = System.Windows.Forms.TabDrawMode.OwnerDrawFixed;
+            this.tbcControl.Location = new System.Drawing.Point(3, -20);
             this.tbcControl.Name = "tbcControl";
             this.tbcControl.SelectedIndex = 0;
             this.tbcControl.Size = new System.Drawing.Size(569, 343);
@@ -467,21 +478,11 @@
             this.btnModifierAbsence.UseVisualStyleBackColor = true;
             this.btnModifierAbsence.Click += new System.EventHandler(this.btnModifierAbsence_Click);
             // 
-            // btnAjout
-            // 
-            this.btnAjout.Location = new System.Drawing.Point(11, 148);
-            this.btnAjout.Name = "btnAjout";
-            this.btnAjout.Size = new System.Drawing.Size(88, 23);
-            this.btnAjout.TabIndex = 6;
-            this.btnAjout.Text = "Ajouter";
-            this.btnAjout.UseVisualStyleBackColor = true;
-            this.btnAjout.Click += new System.EventHandler(this.btnAjout_Click);
-            // 
             // FrmPersonnel
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(575, 353);
+            this.ClientSize = new System.Drawing.Size(575, 306);
             this.Controls.Add(this.tbcControl);
             this.Name = "FrmPersonnel";
             this.Text = "MediaTek86 - gestion du personnel V0.5";

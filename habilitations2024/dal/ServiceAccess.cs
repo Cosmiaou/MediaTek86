@@ -9,7 +9,9 @@ using System.Windows.Forms;
 
 namespace mediatek86.dal
 {
-
+    /// <summary>
+    /// Classe d'accès aux données pour les objets de type Service
+    /// </summary>
     public class ServiceAccess
     {
         private readonly Access access;
@@ -23,9 +25,9 @@ namespace mediatek86.dal
         }
 
         /// <summary>
-        /// Crée et envoie une requête SQL pour demander la liste des profils
+        /// Crée et envoie une requête SQL pour demander la liste des services
         /// </summary>
-        /// <returns>Liste des profils</returns>
+        /// <returns>Liste des services</returns>
         public List<Service> GetItems()
         {
             List<Service> liste = new List<Service>();

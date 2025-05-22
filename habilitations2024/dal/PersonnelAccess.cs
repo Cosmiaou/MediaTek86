@@ -8,6 +8,9 @@ using mediatek86.model;
 
 namespace mediatek86.dal
 {
+    /// <summary>
+    /// Classe d'accès aux données pour les objets de type Personnel
+    /// </summary>
     public class PersonnelAccess
     {
         private readonly Access access;
@@ -65,7 +68,7 @@ namespace mediatek86.dal
         }
 
         /// <summary>
-        /// Crée et envoie une requête d'ajout grâce à l'objet développeur reçu
+        /// Crée et envoie une requête d'ajout grâce à l'objet perso reçu
         /// </summary>
         /// <param name="perso"></param>
         public void AddItem (Personnel perso) {
@@ -84,7 +87,7 @@ namespace mediatek86.dal
         }
 
         /// <summary>
-        /// Crée et envoie une requête de mise à jour du développeur envoyé, en se basant sur ses nouveaux paramètres
+        /// Crée et envoie une requête de mise à jour du perso envoyé, en se basant sur ses nouveaux paramètres
         /// </summary>
         /// <param name="perso"></param>
         public void UpdateItem (Personnel perso) {

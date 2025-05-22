@@ -6,24 +6,27 @@ using System.Threading.Tasks;
 
 namespace mediatek86.model
 {
+    /// <summary>
+    /// Classe correspondant à la table Motif de la BdD
+    /// </summary>
     public class Motif
     {
         /// <summary>
         /// Constructeur
         /// </summary>
-        /// <param name="idmotif"></param>
-        /// <param name="libelle"></param>
+        /// <param name="idmotif">id du motif entre 1 et 4 tel que défini dans la db</param>
+        /// <param name="libelle">libelle du motif</param>
         public Motif(int idmotif, string libelle) {
             this.Idmotif = idmotif;
             this.Libelle = libelle;
         }
 
         /// <summary>
-        /// ID du motif
+        /// Récupère l'ID du motif
         /// </summary>
         public int Idmotif { get; }
         /// <summary>
-        /// Libellé du motif
+        /// Récupère le libellé du motif
         /// </summary>
         public string Libelle { get; }
 

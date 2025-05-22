@@ -16,6 +16,9 @@ using System.Diagnostics.Eventing.Reader;
 
 namespace mediatek86.view
 {
+    /// <summary>
+    /// Classe du form contenant deux onglets : Personnels avec la liste du personnels, et Absence avec la liste des absences
+    /// </summary>
     public partial class FrmPersonnel : Form
     {
         private FrmHabilitationsController controller;

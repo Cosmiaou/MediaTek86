@@ -9,7 +9,9 @@ using System.Windows.Forms;
 
 namespace mediatek86.dal
 {
-
+    /// <summary>
+    /// Classe d'accès aux données pour les objets de type Motif
+    /// </summary>
     public class MotifAccess
     {
         private readonly Access access;

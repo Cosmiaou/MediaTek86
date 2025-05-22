@@ -8,6 +8,9 @@ using mediatek86.model;
 
 namespace mediatek86.dal
 {
+    /// <summary>
+    /// Classe d'accès aux données pour les objets de type Absence
+    /// </summary>
     public class AbsenceAccess
     {
         private readonly Access access;
@@ -18,7 +21,7 @@ namespace mediatek86.dal
         }
 
         /// <summary>
-        /// Crée et envoie une requête SQL pour recevoir la liste des absences
+        /// Crée et envoie une requête SQL pour recevoir la liste des absences du personnel correspondant à l'ID indiqué.
         /// </summary>
         /// <returns>Liste des développeurs</returns>
         public List<Absence> GetLesAbsences(Personnel perso)
@@ -72,7 +75,7 @@ namespace mediatek86.dal
         }
 
         /// <summary>
-        /// Crée et envoie une requête d'ajout grâce à l'objet développeur reçu
+        /// Crée et envoie une requête d'ajout grâce à l'objet absence reçu
         /// </summary>
         /// <param name="absence"></param>
         public void AddItem (Absence absence) {
@@ -90,7 +93,7 @@ namespace mediatek86.dal
         }
 
         /// <summary>
-        /// Crée et envoie une requête de mise à jour du développeur envoyé, en se basant sur ses nouveaux paramètres
+        /// Crée et envoie une requête de mise à jour du absence envoyé, en se basant sur ses nouveaux paramètres
         /// </summary>
         /// <param name="absence"></param>
         public void UpdateItem (Absence absence) {

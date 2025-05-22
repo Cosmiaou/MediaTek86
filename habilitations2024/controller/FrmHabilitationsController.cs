@@ -9,8 +9,12 @@ using Mysqlx.Crud;
 
 namespace mediatek86.controller
 {
+    /// <summary>
+    /// Controller du form Personnel
+    /// </summary>
     public class FrmHabilitationsController
     {
+
         private readonly PersonnelAccess persoAccess;
         private readonly ServiceAccess serviceAccess;
         private readonly MotifAccess motifAccess;
@@ -30,7 +34,7 @@ namespace mediatek86.controller
         /// <summary>
         /// Reçoit la liste du personnel
         /// </summary>
-        /// <returns>List Developpeur</returns>
+        /// <returns>List Personnel</returns>
         public List<Personnel> GetLesPerso()
         {
             return persoAccess.GetLesPersonnels();
@@ -68,6 +72,11 @@ namespace mediatek86.controller
         /// </summary>
         /// <param name="perso">Object de type Personnel</param>
         public void DelPerso (Personnel perso) {
+            List<Absence> absences = absenceAccess.GetLesAbsences(perso);
+            foreach (Absence absence in absences)
+            {
+                DelAbsence(absence);
+            }
             persoAccess.DelItem(perso);
         }
 
@@ -90,7 +99,7 @@ namespace mediatek86.controller
         /// <summary>
         /// Appelle la fonction de suppression d'une absence
         /// </summary>
-        /// <param name="absence"></param>
+        /// <param name="absence">Objet absence</param>
         public void DelAbsence(Absence absence)
         {
             absenceAccess.DelItem(absence);

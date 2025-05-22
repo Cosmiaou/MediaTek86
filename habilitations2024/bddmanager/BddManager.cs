@@ -23,7 +23,7 @@ namespace mediatek86.bddmanager
         private readonly MySqlConnection connection;
 
         /// <summary>
-        /// Locker pour supporter le multithread - pas forcément nécessaire
+        /// Locker pour supporter le multithread
         /// </summary>
         private static readonly object locker = new object();
 
@@ -79,6 +79,9 @@ namespace mediatek86.bddmanager
                     commande.Parameters.Add(new MySqlParameter(element.Key, element.Value));
                 }
             }
+
+            string texte = commande.CommandText;
+            Console.WriteLine(texte);
 
             //Préparation et éxécution
             commande.Prepare();

@@ -9,7 +9,9 @@ using System.Windows.Forms;
 
 namespace mediatek86.dal
 {
-
+    /// <summary>
+    /// Classe d'accès aux données pour les objets de type Responsable. Sert à l'authentification.
+    /// </summary>
     public class ResponsableAccess
     {
         private readonly Access access;
@@ -23,10 +25,10 @@ namespace mediatek86.dal
         }
 
         /// <summary>
-        /// Crée et envoie une requête afin de vérifier si le profil de l'objet dev envoyé est un admin ou non. Return true si vrai
+        /// Crée et envoie une requête afin de vérifier si le profil de l'objet Responsable envoyé est un admin ou non. Return true si vrai
         /// </summary>
-        /// <param name="admin"></param>
-        /// <returns></returns>
+        /// <param name="responsable">objet de type Responsable</param>
+        /// <returns>TRUE or FALSE</returns>
         public bool ControleAuthentification(Responsable responsable)
         {
             string requete = "SELECT login, pwd FROM responsable WHERE login = @login AND pwd = SHA2(@pwd, 256);";
