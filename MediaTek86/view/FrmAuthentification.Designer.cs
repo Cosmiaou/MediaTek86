@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(FrmAuthentification));
             this.txtPwd = new System.Windows.Forms.Label();
             this.txbLogin = new System.Windows.Forms.TextBox();
             this.txbPwd = new System.Windows.Forms.TextBox();
@@ -139,6 +140,7 @@
             this.Controls.Add(this.txbPwd);
             this.Controls.Add(this.txbLogin);
             this.Controls.Add(this.txtPwd);
+            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Name = "FrmAuthentification";
             this.Text = "MediaTek86 - Connexion";
             this.Load += new System.EventHandler(this.FrmAuthentification_Load);
