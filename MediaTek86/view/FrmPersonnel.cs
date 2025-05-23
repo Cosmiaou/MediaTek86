@@ -21,7 +21,7 @@ namespace mediatek86.view
     /// </summary>
     public partial class FrmPersonnel : Form
     {
-        private FrmHabilitationsController controller;
+        private FrmPersonnelsController controller;
         /// <summary>
         /// Objet de type Personnel représentant le personnel sélectionné dans dgwDonnees, afin d'être utilisé dans plusieurs fonctions de l'onglet Absence
         /// </summary>
@@ -50,7 +50,7 @@ namespace mediatek86.view
         /// <param name="e"></param>
         private void Form1_Load(object sender, EventArgs e)
         {
-            controller = new FrmHabilitationsController();
+            controller = new FrmPersonnelsController();
             afficherTout();
             remplirCombo();
         }

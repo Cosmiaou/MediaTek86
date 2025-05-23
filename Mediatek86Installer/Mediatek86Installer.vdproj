@@ -1002,7 +1002,7 @@
         {
             "{5259A561-127C-4D43-A0A1-72F10C7B3BF8}:_2DBC7D21E2CD4A81B465776597310E70"
             {
-            "SourcePath" = "8:..\\habilitations2024\\obj\\Release\\MediaTek86.exe"
+            "SourcePath" = "8:..\\MediaTek86\\obj\\Release\\MediaTek86.exe"
             "TargetName" = "8:"
             "Tag" = "8:"
             "Folder" = "8:_8AAF64F1F1724E46AFE809C4AD8940E5"

@@ -71,7 +71,7 @@
   <ItemGroup>
     <Compile Include="bddmanager\BddManager.cs" />
     <Compile Include="controller\FrmAuthentificationController.cs" />
-    <Compile Include="controller\FrmHabilitationsController.cs" />
+    <Compile Include="controller\FrmPersonnelsController.cs" />
     <Compile Include="dal\Access.cs" />
     <Compile Include="dal\AbsenceAccess.cs" />
     <Compile Include="dal\PersonnelAccess.cs" />

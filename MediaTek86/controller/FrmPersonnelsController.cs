@@ -12,7 +12,7 @@ namespace mediatek86.controller
     /// <summary>
     /// Controller du form Personnel
     /// </summary>
-    public class FrmHabilitationsController
+    public class FrmPersonnelsController
     {
 
         private readonly PersonnelAccess persoAccess;
@@ -23,7 +23,7 @@ namespace mediatek86.controller
         /// <summary>
         /// Constructeur
         /// </summary>
-        public FrmHabilitationsController()
+        public FrmPersonnelsController()
         {
             serviceAccess = new ServiceAccess();
             persoAccess = new PersonnelAccess();
