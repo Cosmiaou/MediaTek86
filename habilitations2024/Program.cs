@@ -7,6 +7,11 @@ using mediatek86.view;
 
 namespace mediatek86
 {
+    /// <summary>
+    /// Application de gestion des absences des personnels
+    /// </summary>
+    internal class NamespaceDoc { }
+
     internal static class Program
     {
         /// <summary>

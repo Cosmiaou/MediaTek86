@@ -8,8 +8,8 @@ using System.Windows.Forms;
 using MySql.Data.MySqlClient;
 
 namespace mediatek86.bddmanager
-
 {
+
     /// <summary>
     /// Classe de connexion. Modèle singleton. N'est pas spécifique au projet. Y accéder uniquement par la classe Access.
     /// </summary>

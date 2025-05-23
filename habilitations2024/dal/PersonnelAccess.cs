@@ -15,6 +15,9 @@ namespace mediatek86.dal
     {
         private readonly Access access;
 
+        /// <summary>
+        /// Constructeur
+        /// </summary>
         public PersonnelAccess()
         {
             access = Access.getInstance();

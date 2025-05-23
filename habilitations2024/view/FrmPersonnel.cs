@@ -95,7 +95,7 @@ namespace mediatek86.view
         /// <param name="nom"></param>
         /// <param name="tel"></param>
         /// <param name="email"></param>
-        /// <param name="profil"></param>
+        /// <param name="service"></param>
         private void modifier(string prenom, string nom, string tel, string email, Service service) {
             Personnel objet = (Personnel)dgwDonnees.CurrentRow.DataBoundItem;
             grbPersonnel.Enabled = false;
