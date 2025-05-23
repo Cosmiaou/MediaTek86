@@ -453,7 +453,7 @@
         "Name" = "8:Microsoft Visual Studio"
         "ProductName" = "8:Mediatek86Installer"
         "ProductCode" = "8:{8BB47416-91DE-4B0B-91B0-BDB3A10ED1B2}"
-        "PackageCode" = "8:{1A0234E9-3470-49C0-8FD9-E2D08D899A72}"
+        "PackageCode" = "8:{AB1F1285-E234-4A28-B9DE-6B21416263F5}"
         "UpgradeCode" = "8:{9E811A87-C3D4-4211-AB5A-A36943B51047}"
         "AspNetVersion" = "8:4.0.30319.0"
         "RestartWWWService" = "11:FALSE"
@@ -577,7 +577,7 @@
             {
             "Name" = "8:MediaTek86"
             "Arguments" = "8:"
-            "Description" = "8:"
+            "Description" = "8:application de gestion des absences"
             "ShowCmd" = "3:1"
             "IconIndex" = "3:0"
             "Transitive" = "11:FALSE"
@@ -591,7 +591,7 @@
             {
             "Name" = "8:MediaTek86"
             "Arguments" = "8:"
-            "Description" = "8:"
+            "Description" = "8:application de gestion des absences"
             "ShowCmd" = "3:1"
             "IconIndex" = "3:0"
             "Transitive" = "11:FALSE"
