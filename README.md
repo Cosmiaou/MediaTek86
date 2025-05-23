@@ -9,6 +9,7 @@ Tout commit réalisé avant le 21 mai est donc lié à l'ancien projet.
 # Problèmes connus
 
  - Le logo de l'application n'apparaît pas. J'ai déjà essayé de rêgler ça et je n'ai pas su faire. Ce n'est probablement pas le plus important.
+ - Il est possible qu'après avoir supprimé une personne, puis en avoir recréé une nouvelle personne, les absences associées à la personnes supprimées aient survécus. Ce n'est pas censé être le cas, mais quand ça arrive, il suffit de supprimer les absences non-désirés. Cela ne cause pas de problèmes logiques et ne cause aucun crash.
 
 # Origines des messages d'erreurs :
 - E00 : BddManager.reqSelect
