@@ -48,9 +48,9 @@ namespace mediatek86.dal
                 }
                 return liste;
             }
-            catch
+            catch (Exception ex) 
             {
-                MessageBox.Show("E07 : Erreur lors de l'exécution de la requête SQL");
+                MessageBox.Show("E07 : Erreur lors de l'exécution de la requête SQL = " + ex.ToString());
                 Application.Exit();
                 return liste = null;
             }

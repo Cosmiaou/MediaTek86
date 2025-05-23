@@ -47,9 +47,9 @@ namespace mediatek86.dal
                 } 
                 return liste;
             }
-            catch
+            catch (Exception ex) 
             {
-                MessageBox.Show("E02 : Erreur lors de l'exécution de la requête");
+                MessageBox.Show(("E02 : Erreur lors de l'exécution de la requête = " + ex));
                 Environment.Exit(0);
                 return liste = null;
             }
@@ -66,7 +66,7 @@ namespace mediatek86.dal
 
             parameters.Add("@idpersonnel", perso.Idpersonnel);
 
-            try { access.Manager.reqUpdate(requete, parameters); } catch { MessageBox.Show("E03 : Erreur lors de l'exécution de la requête"); }
+            try { access.Manager.reqUpdate(requete, parameters); } catch (Exception e) { MessageBox.Show("E03 : Erreur lors de l'exécution de la requête = " + e); }
 
         }
 
@@ -86,7 +86,7 @@ namespace mediatek86.dal
             parameters.Add("@mail", perso.Mail);
             parameters.Add("idservice", perso.Service.Idservice);
 
-            try { access.Manager.reqUpdate(requete, parameters); } catch { MessageBox.Show("E04 : Erreur lors de l'exécution de la requête"); }
+            try { access.Manager.reqUpdate(requete, parameters); } catch (Exception e) { MessageBox.Show("E04 : Erreur lors de l'exécution de la requête = " + e); }
         }
 
         /// <summary>
@@ -105,7 +105,7 @@ namespace mediatek86.dal
             parameters.Add("@mail", perso.Mail);
             parameters.Add("idservice", perso.Service.Idservice);
 
-            try { access.Manager.reqUpdate(requete, parameters); } catch { MessageBox.Show("E05 : Erreur lors de l'exécution de la requête"); }
+            try { access.Manager.reqUpdate(requete, parameters); } catch (Exception e) { MessageBox.Show(("E05 : Erreur lors de l'exécution de la requête = " + e)); }
         }
 
     }

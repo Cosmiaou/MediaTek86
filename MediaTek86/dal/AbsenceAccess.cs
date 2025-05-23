@@ -51,14 +51,16 @@ namespace mediatek86.dal
                         Absence absence = new Absence((int)item[0], (DateTime)item[1], (DateTime)item[2], motif, personnel);
                         liste.Add(absence);
                     }
-                } 
+                }
                 return liste;
             }
-            catch
+            catch (Exception ex)
             {
-                MessageBox.Show("E12 : Erreur lors de l'exécution de la requête");
-                Environment.Exit(0);
-                return liste = null;
+                {
+                    MessageBox.Show(("E12 : Erreur lors de l'exécution de la requête = " + ex));
+                    Environment.Exit(0);
+                    return liste = null;
+                }
             }
         }
 
@@ -73,7 +75,7 @@ namespace mediatek86.dal
 
             parameters.Add("@idabsence", absence.Idabsence);
 
-            try { access.Manager.reqUpdate(requete, parameters); } catch { MessageBox.Show("E13 : Erreur lors de l'exécution de la requête"); }
+            try { access.Manager.reqUpdate(requete, parameters); } catch (Exception e) { MessageBox.Show(("E13 : Erreur lors de l'exécution de la requête = " + e)); }
 
         }
 
@@ -92,7 +94,7 @@ namespace mediatek86.dal
             parameters.Add("@idmotif", absence.Motif.Idmotif);
             parameters.Add("@idpersonnel", absence.Personnel.Idpersonnel);
 
-            try { access.Manager.reqUpdate(requete, parameters); } catch { MessageBox.Show("E14 : Erreur lors de l'exécution de la requête"); }
+            try { access.Manager.reqUpdate(requete, parameters); } catch (Exception e) { MessageBox.Show(("E14 : Erreur lors de l'exécution de la requête = ") + e); }
         }
 
         /// <summary>
@@ -110,7 +112,7 @@ namespace mediatek86.dal
             parameters.Add("@idmotif", absence.Motif.Idmotif);
             parameters.Add("@idpersonnel", absence.Personnel.Idpersonnel);
 
-            try { access.Manager.reqUpdate(requete, parameters); } catch { MessageBox.Show("E15 : Erreur lors de l'exécution de la requête"); }
+            try { access.Manager.reqUpdate(requete, parameters); } catch (Exception e) { MessageBox.Show(("E15 : Erreur lors de l'exécution de la requête = " + e)); }
         }
     }
 }

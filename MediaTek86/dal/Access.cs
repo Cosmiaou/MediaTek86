@@ -42,8 +42,8 @@ namespace mediatek86.dal
                 this.Manager = BddManager.getInstance(connectionString);
                 instance = this;
             }
-            catch {
-                MessageBox.Show("E01 : Erreur lors de la connection à la BDD");
+            catch (Exception e) {
+                MessageBox.Show(("E01 : Erreur lors de la connection à la BDD" + e));
                 Environment.Exit(0);
             }
         }

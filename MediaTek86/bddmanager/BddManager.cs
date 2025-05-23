@@ -88,7 +88,7 @@ namespace mediatek86.bddmanager
 
             //Préparation et éxécution
             commande.Prepare();
-            try { commande.ExecuteNonQuery(); } catch { MessageBox.Show("E08 : Erreur dans reqUpdate"); }
+            try { commande.ExecuteNonQuery(); } catch (Exception e) { MessageBox.Show(("E08 : Erreur dans reqUpdate = " + e)); }
         }
 
 
@@ -113,22 +113,27 @@ namespace mediatek86.bddmanager
 
             commande.Prepare();
 
-
-            MySqlDataReader reader = commande.ExecuteReader();
-            int nbCols = reader.FieldCount;
-
-            Console.WriteLine("Exécution du reader " + nbCols);
-
             List<Object[]> liste = new List<object[]>();
 
-            while (reader.Read())
+            try
             {
-                Object[] attributs = new Object[nbCols];
-                reader.GetValues(attributs);
-                liste.Add(attributs);
-            } 
+                MySqlDataReader reader = commande.ExecuteReader();
+                int nbCols = reader.FieldCount;
 
-            reader.Close();
+                Console.WriteLine("Exécution du reader " + nbCols);
+
+
+                while (reader.Read())
+                {
+                    Object[] attributs = new Object[nbCols];
+                    reader.GetValues(attributs);
+                    liste.Add(attributs);
+                }
+
+                reader.Close();
+            }
+            catch (Exception ex) { MessageBox.Show("Erreur E00 : erreur dans reqSelect = " + (ex.ToString())); }
+
             return liste;
         }
     }

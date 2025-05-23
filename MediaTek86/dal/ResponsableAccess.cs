@@ -52,9 +52,9 @@ namespace mediatek86.dal
                 }
 
             }
-            catch
+            catch (Exception ex) 
             {
-                MessageBox.Show("E09 : Erreur lors de l'exécution de la requête");
+                MessageBox.Show(("E09 : Erreur lors de l'exécution de la requête = " + ex));
                 Environment.Exit(0);
                 return false;
             }
