@@ -227,7 +227,6 @@ namespace mediatek86.view
                 viderChamps();
                 grbAjouterPerso.Enabled = false;
                 grbPersonnel.Enabled = true;
-
             }
         }
 
@@ -236,6 +235,7 @@ namespace mediatek86.view
         /// </summary>
         private void viderChamps()
         {
+            grbAjouterPerso.Text = "Ajouter un personnel : ";
             txbPrenom.Text = "";
             txbNom.Text = "";
             txbTel.Text = "";

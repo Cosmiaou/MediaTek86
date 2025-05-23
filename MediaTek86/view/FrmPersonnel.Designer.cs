@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(FrmPersonnel));
             this.grbPersonnel = new System.Windows.Forms.GroupBox();
             this.btnAjout = new System.Windows.Forms.Button();
             this.btnAbsence = new System.Windows.Forms.Button();
@@ -484,8 +485,9 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(575, 306);
             this.Controls.Add(this.tbcControl);
+            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Name = "FrmPersonnel";
-            this.Text = "MediaTek86 - gestion du personnel V0.5";
+            this.Text = "MediaTek86 - gestion du personnel V1.0";
             this.Load += new System.EventHandler(this.Form1_Load);
             this.grbPersonnel.ResumeLayout(false);
             this.grbPersonnel.PerformLayout();
