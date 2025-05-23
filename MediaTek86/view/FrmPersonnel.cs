@@ -403,6 +403,7 @@ namespace mediatek86.view
                 {
                     controller.DelAbsence(absence);
                     afficherAbsence(personnelSelectionne);
+                    dgwAbsence_CellContentClick(null, null);
                 }
             }
             else { MessageBox.Show("Merci de choisir une absence à supprimer"); }
