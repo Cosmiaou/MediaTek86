@@ -10,6 +10,7 @@ Tout commit réalisé avant le 21 mai est donc lié à l'ancien projet.
 
  - Le logo de l'application n'apparaît pas. J'ai déjà essayé de rêgler ça et je n'ai pas su faire. Ce n'est probablement pas le plus important.
  - Il est possible qu'après avoir supprimé une personne, puis en avoir recréé une nouvelle personne, les absences associées à la personnes supprimées aient survécus. Ce n'est pas censé être le cas, mais quand ça arrive, il suffit de supprimer les absences non-désirés. Cela ne cause pas de problèmes logiques et ne cause aucun crash.
+ - Les absences du fichier SQL sont en conflit. Cela ne cause pas de problème logique dans l'application. Cependant, certaines manipulations des absences peuvent rencontrer des conflits, puisque l'application vérifie pour toute modification/ajout d'absence l'existence ou non de conflit. Pour vos tests, je recommande de créer des absences sur un personnage vierge, 
 
 # Origines des messages d'erreurs :
 - E00 : BddManager.reqSelect
