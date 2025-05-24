@@ -3,6 +3,14 @@ DROP TABLE IF EXISTS `absence`;
 DROP TABLE IF EXISTS `personnel`;
 DROP TABLE IF EXISTS `service`;
 DROP TABLE IF EXISTS `responsable`;
+
+--
+-- Privilèges pour `appmediatek_PC1`@`%`
+--
+CREATE USER 'appmediatek_PC1'@'%' IDENTIFIED BY '7P!qGm#d#8T9#nrb';
+GRANT SELECT, INSERT, UPDATE, DELETE, FILE, CREATE TEMPORARY TABLES ON *.* TO `appmediatek_PC1`@`%`;
+FLUSH PRIVILEGES;
+
 --
 -- Création de la table responsable
 --

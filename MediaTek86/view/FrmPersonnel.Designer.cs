@@ -67,6 +67,7 @@
             this.dgwAbsence = new System.Windows.Forms.DataGridView();
             this.btnSupprimerAbsence = new System.Windows.Forms.Button();
             this.btnModifierAbsence = new System.Windows.Forms.Button();
+            this.button1 = new System.Windows.Forms.Button();
             this.grbPersonnel.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgwDonnees)).BeginInit();
             this.grbAjouterPerso.SuspendLayout();
@@ -80,6 +81,7 @@
             // 
             // grbPersonnel
             // 
+            this.grbPersonnel.Controls.Add(this.button1);
             this.grbPersonnel.Controls.Add(this.btnAjout);
             this.grbPersonnel.Controls.Add(this.btnAbsence);
             this.grbPersonnel.Controls.Add(this.lblConfirm);
@@ -479,6 +481,16 @@
             this.btnModifierAbsence.UseVisualStyleBackColor = true;
             this.btnModifierAbsence.Click += new System.EventHandler(this.btnModifierAbsence_Click);
             // 
+            // button1
+            // 
+            this.button1.Location = new System.Drawing.Point(292, 148);
+            this.button1.Name = "button1";
+            this.button1.Size = new System.Drawing.Size(38, 23);
+            this.button1.TabIndex = 7;
+            this.button1.Text = "button1";
+            this.button1.UseVisualStyleBackColor = true;
+            this.button1.Click += new System.EventHandler(this.button1_Click);
+            // 
             // FrmPersonnel
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -546,6 +558,7 @@
         private System.Windows.Forms.Label lblDateFin;
         private System.Windows.Forms.DateTimePicker dtpDebut;
         private System.Windows.Forms.Button btnAjout;
+        private System.Windows.Forms.Button button1;
     }
 }
 
